@@ -1,6 +1,7 @@
 package com.github.mrdynamo.tutorial;
 
 import com.github.mrdynamo.tutorial.util.RegistryHandler;
+import net.minecraft.item.ItemGroup;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -22,15 +23,16 @@ public class Tutorial
 
     // Constructor
     public Tutorial() {
-        // Register the setup method for modloading
+
+        // Register methods for modloading
         modBus.addListener(this::setup);
-        // Register the doClientStuff method for modloading
         modBus.addListener(this::doClientStuff);
 
         RegistryHandler.init();
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+
     }
 
     private void setup(final FMLCommonSetupEvent event)
