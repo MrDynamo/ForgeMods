@@ -10,12 +10,12 @@ buildscript {
 }
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+apply plugin: 'maven'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '1.0'
-group = 'com.yourname.modid' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = 'modid'
+group = 'com.github.mrdynamo' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = 'examplemod'
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
@@ -89,7 +89,7 @@ dependencies {
     // Specify the version of Minecraft to use, If this is any group other then 'net.minecraft' it is assumed
     // that the dep is a ForgeGradle 'patcher' dependency. And it's patches will be applied.
     // The userdev artifact is a special name and will get all sorts of transformations applied to it.
-    minecraft 'net.minecraftforge:forge:1.15.2-31.2.0'
+    minecraft 'net.minecraftforge:forge:' + minecraft_version + '-' + forge_version
 
     // You may put jars on which you depend on in ./libs or you may define them like so..
     // compile "some.group:artifact:version:classifier"
@@ -111,16 +111,59 @@ dependencies {
 
 }
 
+task buildInfo {
+    def cmd = "git rev-parse --short HEAD"
+    //def cmd = "git rev-parse --abbrev-ref HEAD"
+    def proc = cmd.execute()
+    proc.waitFor()
+    if (proc.exitValue() == 0) {
+        ext.revision = proc.text.trim()
+    } else {
+        ext.revision = "GITBORK"
+    }
+
+    if (System.getenv().BUILD_NUMBER != null) {
+        ext.buildNum = System.getenv().BUILD_NUMBER
+    } else {
+        ext.buildNum = "DEV.${project.buildInfo.revision}"
+    }
+
+}
+
+version = "${minecraft_version}-${mod_version}.${project.buildInfo.buildNum}"
+
+processResources {
+    exclude '**/*.xcf'
+    from(sourceSets.main.resources.srcDirs) {
+        include 'META-INF/mods.toml'
+
+        expand 'version': project.version, 'mcversion': minecraft_version, 'forge_version': forge_version_toml
+    }
+
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'META-INF/mods.toml'
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allJava
+    classifier = 'sources'
+}
+
+artifacts {
+    //archives sourcesJar
+}
+
 // Example for how to get properties into the manifest for reading by the runtime..
 jar {
     manifest {
         attributes([
             "Specification-Title": "examplemod",
-            "Specification-Vendor": "examplemodsareus",
+            "Specification-Vendor": "MrDynamo",
             "Specification-Version": "1", // We are version 1 of ourselves
             "Implementation-Title": project.name,
             "Implementation-Version": "${version}",
-            "Implementation-Vendor" :"examplemodsareus",
+            "Implementation-Vendor" :"MrDynamo",
             "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }
@@ -136,6 +179,7 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             artifact jar
+            artifact sourcesJar
         }
     }
     repositories {
