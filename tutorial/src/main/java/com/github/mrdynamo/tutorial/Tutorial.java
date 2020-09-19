@@ -28,7 +28,7 @@ public class Tutorial
         // Instantiate modBus
         modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        // Register methods for modloading
+        // Register listeners
         modBus.addListener(this::setup);
         modBus.addListener(this::doClientStuff);
 
@@ -40,13 +40,9 @@ public class Tutorial
 
     }
 
-    private void setup(final FMLCommonSetupEvent event) {
-        // some preinit code
-    }
+    private void setup(final FMLCommonSetupEvent event) { /* some preinit code */ }
 
-    private void doClientStuff(final FMLClientSetupEvent event) {
-        // do something that can only be done on the client
-    }
+    private void doClientStuff(final FMLClientSetupEvent event) { /* do something that can only be done on the client */ }
 
     // Custom ItemGroup TAB in creative
     public static final ItemGroup TAB = new ItemGroup("tutorialTab") {
