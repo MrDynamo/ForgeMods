@@ -1,20 +1,24 @@
 package com.github.mrdynamo.tutorial;
 
+import com.github.mrdynamo.tutorial.util.RegistryHandler;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod(Tutorial.MODID)
 public class Tutorial
 {
     /*** Private class variables ***/
-    private IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
+    private static final Logger LOGGER = LogManager.getLogger();
 
     /*** Public class variables ***/
     public static final String MODID = "tutorial";
+    public final IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
     // Constructor
     public Tutorial() {
@@ -22,6 +26,8 @@ public class Tutorial
         modBus.addListener(this::setup);
         // Register the doClientStuff method for modloading
         modBus.addListener(this::doClientStuff);
+
+        RegistryHandler.init();
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
