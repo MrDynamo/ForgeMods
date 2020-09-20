@@ -1,12 +1,14 @@
 package com.github.mrdynamo.tutorial.util;
 
 import com.github.mrdynamo.tutorial.Tutorial;
+import com.github.mrdynamo.tutorial.armor.ModArmorMaterial;
 import com.github.mrdynamo.tutorial.blocks.BlockItemBase;
 import com.github.mrdynamo.tutorial.blocks.RubyBlock;
 import com.github.mrdynamo.tutorial.blocks.RubyOre;
 import com.github.mrdynamo.tutorial.items.ItemBase;
 import com.github.mrdynamo.tutorial.tools.ModItemTier;
 import net.minecraft.block.Block;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.*;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -18,7 +20,7 @@ public class RegistryHandler {
     public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, Tutorial.MODID);
     public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, Tutorial.MODID);
 
-    // Init mod assets-
+    // Init mod assets
     public static void init() {
         ITEMS.register(Tutorial.modBus);
         BLOCKS.register(Tutorial.modBus);
@@ -26,6 +28,7 @@ public class RegistryHandler {
 
     /*** Items ***/
     public static final RegistryObject<Item> RUBY = ITEMS.register("ruby", ItemBase::new);
+    //public static final RegistryObject<PoisonApple> Poison_Apple = ITEMS.register(poison_apple, PoisonApple::new);
 
     /*** Tools ***/
     // Damage: 1 + baseDamage(5) + addedDamage(3)
@@ -36,6 +39,12 @@ public class RegistryHandler {
     public static final RegistryObject<ShovelItem> RUBY_SHOVEL = ITEMS.register("ruby_shovel", () -> new ShovelItem(ModItemTier.RUBY, 3, -1.4F, new Item.Properties().group(Tutorial.TAB)));
     public static final RegistryObject<AxeItem> RUBY_AXE = ITEMS.register("ruby_axe", () -> new AxeItem(ModItemTier.RUBY, 3, -1.6F, new Item.Properties().group(Tutorial.TAB)));
     public static final RegistryObject<HoeItem> RUBY_HOE = ITEMS.register("ruby_hoe", () -> new HoeItem(ModItemTier.RUBY, -0.5F, new Item.Properties().group(Tutorial.TAB)));
+
+    /*** Armor ***/
+    public static final RegistryObject<ArmorItem> RUBY_HELMET = ITEMS.register("ruby_helmet", () -> new ArmorItem(ModArmorMaterial.RUBY, EquipmentSlotType.HEAD, new Item.Properties().group(Tutorial.TAB)));
+    public static final RegistryObject<ArmorItem> RUBY_CHESTPLATE = ITEMS.register("ruby_chestplate", () -> new ArmorItem(ModArmorMaterial.RUBY, EquipmentSlotType.CHEST, new Item.Properties().group(Tutorial.TAB)));
+    public static final RegistryObject<ArmorItem> RUBY_LEGGINGS = ITEMS.register("ruby_leggings", () -> new ArmorItem(ModArmorMaterial.RUBY, EquipmentSlotType.LEGS, new Item.Properties().group(Tutorial.TAB)));
+    public static final RegistryObject<ArmorItem> RUBY_BOOTS = ITEMS.register("ruby_boots", () -> new ArmorItem(ModArmorMaterial.RUBY, EquipmentSlotType.FEET, new Item.Properties().group(Tutorial.TAB)));
 
     /*** Blocks ***/
     public static final RegistryObject<Block> RUBY_BLOCK = BLOCKS.register("ruby_block", RubyBlock::new);
