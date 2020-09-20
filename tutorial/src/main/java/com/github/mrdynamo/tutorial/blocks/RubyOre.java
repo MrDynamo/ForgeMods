@@ -12,6 +12,7 @@ public class RubyOre extends Block {
                 .hardnessAndResistance(5.0f, 6.0f)
                 .harvestLevel(2)
                 .harvestTool(ToolType.PICKAXE)
+                .setRequiresTool()
                 .sound(SoundType.METAL)
         );
     }

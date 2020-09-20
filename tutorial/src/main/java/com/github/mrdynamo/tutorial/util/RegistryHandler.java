@@ -18,8 +18,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class RegistryHandler {
 
     /*** Registers ***/
-    public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, Tutorial.MODID);
-    public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, Tutorial.MODID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Tutorial.MODID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Tutorial.MODID);
 
     // Init mod assets
     public static void init() {
@@ -36,7 +36,7 @@ public class RegistryHandler {
     public static final RegistryObject<PickaxeItem> RUBY_PICKAXE = ITEMS.register("ruby_pickaxe", () -> new PickaxeItem(ModItemTier.RUBY, 3, -0.5F, new Item.Properties().group(Tutorial.TAB)));
     public static final RegistryObject<ShovelItem> RUBY_SHOVEL = ITEMS.register("ruby_shovel", () -> new ShovelItem(ModItemTier.RUBY, 3, -1.4F, new Item.Properties().group(Tutorial.TAB)));
     public static final RegistryObject<AxeItem> RUBY_AXE = ITEMS.register("ruby_axe", () -> new AxeItem(ModItemTier.RUBY, 3, -1.6F, new Item.Properties().group(Tutorial.TAB)));
-    public static final RegistryObject<HoeItem> RUBY_HOE = ITEMS.register("ruby_hoe", () -> new HoeItem(ModItemTier.RUBY, -0.5F, new Item.Properties().group(Tutorial.TAB)));
+    public static final RegistryObject<HoeItem> RUBY_HOE = ITEMS.register("ruby_hoe", () -> new HoeItem(ModItemTier.RUBY, -2, -0.5F, new Item.Properties().group(Tutorial.TAB)));
 
     // Damage: 1 + baseDamage(5) + addedDamage(3)
     // Speed: 4 - attSpd (Cooldown)
