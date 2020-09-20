@@ -2,6 +2,11 @@
   "itemGroup.tutorialTab":  "Tutorial Mod",
 
   "item.tutorial.ruby": "Ruby",
+  "item.tutorial.ruby_sword": "Ruby Sword",
+  "item.tutorial.ruby_pickaxe": "Ruby Sword",
+  "item.tutorial.ruby_shovel": "Ruby Sword",
+  "item.tutorial.ruby_axe": "Ruby Sword",
+  "item.tutorial.ruby_hoe": "Ruby Sword",
 
   "block.tutorial.ruby_block": "Ruby Block",
 
