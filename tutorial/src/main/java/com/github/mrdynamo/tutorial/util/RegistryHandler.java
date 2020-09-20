@@ -32,6 +32,6 @@ public class RegistryHandler {
 
     /*** Block Items ***/
     public static final RegistryObject<Item> RUBY_BLOCK_ITEM = ITEMS.register("ruby_block", () -> new BlockItemBase(RUBY_BLOCK.get()));
-    public static final RegistryObject<Item> RUBY_ORE_ITEM = ITEMS.register("ruby_block", () -> new BlockItemBase(RUBY_ORE.get()));
+    public static final RegistryObject<Item> RUBY_ORE_ITEM = ITEMS.register("ruby_ore", () -> new BlockItemBase(RUBY_ORE.get()));
 
 }
